@@ -1,0 +1,67 @@
+.main-body1 {
+  background-color: #3ccace;
+  height: 300;
+  width: auto;
+}
+.main-record-btn {
+  font-size: 30;
+  background-color: blueviolet;
+  height: 50px;
+  width: 200px;
+}
+
+.main-body2 {
+  background-color: teal;
+  height: 3000;
+  width: auto;
+}
+
+
+.main-history {
+  background-color: red;
+  margin: 0;
+  padding: 0;
+}
+
+.main-histories {
+  background-color: white;
+}
+
+.header-img {
+  width: 45px;
+  height: 45px;
+    font-size: 500;
+}
+
+.header-title {
+  font-size: 20px;
+  margin-left: 25px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.header {
+  display: flex;
+  /*position: fixed; ヘッダー固定 */
+  align-items: center;
+  background-color: yellow;
+  height: auto;
+  width: 3000;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  background-color: yellow;
+  height: 100;
+  width: auto;
+  justify-content: space-between;
+}
+.footer-img {
+  height: 200;
+  width: 200;
+}
+.footer-msg {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+/* キャッシュ削除：作成中ページでCtl + Command + R */

@@ -1,0 +1,19 @@
+.header-img {
+   top:20px;
+   left:20px;
+   width: 45px;
+   height: 45px;
+}
+
+
+.header{
+  background-color: yellow;
+  height: 50;
+  width: auto;
+}
+
+.footer {
+  background-color: yellow;
+  height: 50;
+  width: auto;
+}

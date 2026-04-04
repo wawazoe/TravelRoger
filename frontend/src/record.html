@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="css/record.css">  <!-- 一番上固定（DOCTYPEより下に下ろすとCSSがうまくいかなくなる） -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8"> 
+</head>
+<header>
+<!-- 後でヘッダーの共通化をする -->
+<div class="header">
+    <a href=main.html>
+        <img src="img/syugakuryokou_airplane.png" class="header-img">
+    </a>
+</div>
+</header>
+
+<body>
+<p>目的<br>
+<select name="目的">
+  <option value="">目的を選択…</option>
+  <option value="1">旅行</option>
+  <option value="2">ライブ</option>
+  <option value="3">出張</option>
+  <option value="4">その他</option>
+</select><br>
+  <input type="text" name="purpose" size="15">
+</p>
+
+<p>場所<br>
+  <input type="text" name="place" size="15">
+</p>
+
+<p>交通手段<br>
+<select name="交通手段">
+  <option value="">交通手段を選択…</option>
+  <option value="1">飛行機</option>
+  <option value="2">新幹線</option>
+  <option value="3">バス</option>
+  <option value="4">電車</option>
+  <option value="5">自動車</option>
+  <option value="6">自転車</option>
+  <option value="7">徒歩</option>
+</select>
+</p>
+
+<form action="/backend/src" method="post"></form>
+  <a href=main.html>
+    <input type="text" name="username">
+    <button type="submit">送信</button>
+  </a>
+</form>
+
+</body>
+
+<footer>
+<!-- 後でフッターの共通化をする -->
+<div class="footer">
+    フッター
+</div>
+</footer>
+
+</html>

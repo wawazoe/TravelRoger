@@ -1,0 +1,24 @@
+services:
+
+  frontend:
+    build: ./frontend
+    ports:
+      - 8080:80
+
+  backend:
+    build: ./backend
+    ports:
+      - 3000:8080
+    environment:
+      DB_HOST: db
+      DB_USER: travelroger
+      DB_PASSWORD: travelroger
+      DB_NAME: travelroger
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER:     travelroger
+      POSTGRES_PASSWORD: travelroger
+      POSTGRES_DB:       travelroger
