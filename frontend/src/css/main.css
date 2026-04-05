@@ -46,6 +46,11 @@
   background-color: yellow;
   height: auto;
   width: 3000;
+  justify-content: space-between;
+}
+.header-login {
+  width: 30;
+  height: 30;
 }
 
 .footer {
