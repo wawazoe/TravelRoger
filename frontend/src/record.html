@@ -17,7 +17,7 @@
 <body>
 <p>目的<br>
 <select name="目的">
-  <option value="">目的を選択…</option>
+  <option value="0">目的を選択…</option>
   <option value="1">旅行</option>
   <option value="2">ライブ</option>
   <option value="3">出張</option>
@@ -32,7 +32,7 @@
 
 <p>交通手段<br>
 <select name="交通手段">
-  <option value="">交通手段を選択…</option>
+  <option value="0">交通手段を選択…</option>
   <option value="1">飛行機</option>
   <option value="2">新幹線</option>
   <option value="3">バス</option>
@@ -40,12 +40,12 @@
   <option value="5">自動車</option>
   <option value="6">自転車</option>
   <option value="7">徒歩</option>
-</select>
+</select><br>
+  <input type="text" name="way" size="15">
 </p>
 
 <form action="/backend/src" method="post"></form>
   <a href=main.html>
-    <input type="text" name="username">
     <button type="submit">送信</button>
   </a>
 </form>
