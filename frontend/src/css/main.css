@@ -43,14 +43,24 @@
   display: flex;
   /*position: fixed; ヘッダー固定 */
   align-items: center;
+  justify-content: space-between;
   background-color: yellow;
   height: auto;
-  width: 3000;
-  justify-content: space-between;
+  width: auto;
 }
 .header-login {
   width: 30;
   height: 30;
+}
+.header-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.header-right {
+  margin: 20px;
+  width: auto;
+  height: auto;
 }
 
 .footer {
