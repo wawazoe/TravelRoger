@@ -1,6 +1,5 @@
-package record;
-
-protected class record {
+protected class Record {
+  /*
   public static void main(String[] args) {
     int pur = request.getParameter("pur");  //目的
     purpose(pur)
@@ -39,5 +38,5 @@ protected class record {
       System.out.println("値を入力してください");
     }
 
-  }
+  }.  */
 }
