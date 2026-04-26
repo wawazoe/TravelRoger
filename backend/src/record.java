@@ -1,4 +1,4 @@
-protected class Record {
+public class Record {
   /*
   public static void main(String[] args) {
     int pur = request.getParameter("pur");  //目的
