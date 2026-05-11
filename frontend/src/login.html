@@ -1,35 +1,23 @@
-<link rel="stylesheet" href="css/login.css">  <!-- 一番上固定（DOCTYPEより下に下ろすとCSSがうまくいかなくなる） -->
-
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
+    <title>Login</title>
 </head>
-<header>
-</header>
 
 <body>
-  <div class="username">
-    ユーザー名<br>
-      <input type="text" name="usernametxtbox" size="15" placeholder="ユーザー名を入力してください">
-  </div>
-  <div class="password">
-    パスワード<br>
-      <input type="text" name="passwordtxtbox" size="15" placeholder="パスワードを入力してください">
-  </div>
-  <div class="forgot">
-    <a href=forgot.html>
-      ユーザー名・パスワードを忘れた方
-    </a>
-  </div>
-  <form action="/backend/src" method="post"></form>
-    <a href=main.html>
-      <button type="submit">送信</button>
-    </a>
-  </form>
-</body>
 
-<footer>
-</footer>
+    <form>
+        <input type="text" id="email">
+        <input type="password" id="password">
+        <button type="button" onclick="login()">
+            ログイン
+        </button>
+    </form>
+
+    <script src="login.js"></script>
+
+</body>
 
 </html>
