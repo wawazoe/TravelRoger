@@ -14,9 +14,16 @@ public class LoginServer {
                 InputStream is = exchange.getRequestBody();
                 String body = new BufferedReader(new InputStreamReader(is))
                         .lines().collect(Collectors.joining());
+
+                String name = getParam(body, "name");
                 String email = getParam(body, "email");
                 String password = getParam(body, "password");
-                boolean result = signup(email, password);
+
+System.out.println("name = " + name);
+System.out.println("email = " + email);
+System.out.println("password = " + password);
+
+                boolean result = signup(name, email, password);
                 String response = result ? "OK" : "NG";
                 exchange.sendResponseHeaders(200, response.length());
                 OutputStream os = exchange.getResponseBody();
@@ -30,6 +37,7 @@ public class LoginServer {
                 InputStream is = exchange.getRequestBody();
                 String body = new BufferedReader(new InputStreamReader(is))
                         .lines().collect(Collectors.joining());
+
                 String email = getParam(body, "email");
                 String password = getParam(body, "password");
                 boolean isLogin = checkLogin(email, password);
@@ -70,6 +78,7 @@ public class LoginServer {
             Connection conn = DriverManager.getConnection(url, user, pass);
             String sql = "SELECT * FROM users WHERE email=? AND password=?";
             PreparedStatement ps = conn.prepareStatement(sql);
+
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
@@ -82,7 +91,7 @@ public class LoginServer {
         }
     }
 
-    private static boolean signup(String email, String password) {
+    private static boolean signup(String name, String email, String password) {
         String url = "jdbc:postgresql://db:5432/travelloger";
         String user = "travelloger";
         String pass = "travelloger";
@@ -90,10 +99,12 @@ public class LoginServer {
         try {
             Class.forName("org.postgresql.Driver");
             Connection conn = DriverManager.getConnection(url, user, pass);
-            String sql = "INSERT INTO users(email, password) VALUES (?, ?)";
+            String sql = "INSERT INTO users(name, email, password) VALUES (?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, email);
-            ps.setString(2, password);
+
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, password);
             ps.executeUpdate();
             conn.close();
 
