@@ -19,29 +19,25 @@ public class LoginServer {
                 String email = getParam(body, "email");
                 String password = getParam(body, "password");
 
-System.out.println("name = " + name);
-System.out.println("email = " + email);
-System.out.println("password = " + password);
-
                 boolean result = signup(name, email, password);
-                String response = result ? "OK" : "NG";
+                String response = result ? name : "NG";
                 exchange.sendResponseHeaders(200, response.length());
                 OutputStream os = exchange.getResponseBody();
                 os.write(response.getBytes());
                 os.close();
             }
         });
+
         server.createContext("/login", (HttpExchange exchange) -> {
             exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
             if ("POST".equals(exchange.getRequestMethod())) {
                 InputStream is = exchange.getRequestBody();
                 String body = new BufferedReader(new InputStreamReader(is))
                         .lines().collect(Collectors.joining());
-
                 String email = getParam(body, "email");
                 String password = getParam(body, "password");
-                boolean isLogin = checkLogin(email, password);
-                String response = isLogin ? "OK" : "NG";
+                String username = checkLogin(email, password);
+                String response = username != null ? username : "NG";
                 exchange.sendResponseHeaders(200, response.length());
                 OutputStream os = exchange.getResponseBody();
                 os.write(response.getBytes());
@@ -68,7 +64,7 @@ System.out.println("password = " + password);
 
     }
 
-    private static boolean checkLogin(String email, String password) {
+    private static String checkLogin(String email, String password) {
         String url = "jdbc:postgresql://db:5432/travelloger";
         String user = "travelloger";
         String pass = "travelloger";
@@ -76,18 +72,23 @@ System.out.println("password = " + password);
         try {
             Class.forName("org.postgresql.Driver");
             Connection conn = DriverManager.getConnection(url, user, pass);
+
             String sql = "SELECT * FROM users WHERE email=? AND password=?";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, email);
             ps.setString(2, password);
+
             ResultSet rs = ps.executeQuery();
-            boolean result = rs.next();
-            conn.close();
-            return result;
+
+            if (rs.next()) {
+                return rs.getString("name");
+            } else {
+                return null;
+}
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

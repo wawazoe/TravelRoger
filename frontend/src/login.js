@@ -11,7 +11,8 @@ function login() {
     })
     .then(res => res.text())
     .then(data => {
-        if (data === "OK") {
+        if (data !== "NG") {
+            localStorage.setItem("username", data);
             location.href = "main.html";
         } else {
             alert("ログイン失敗");

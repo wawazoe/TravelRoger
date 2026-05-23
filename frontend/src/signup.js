@@ -1,14 +1,8 @@
-console.log("signup.js loaded");
-
 function signup() {
 
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-
-console.log(name);
-console.log(email);
-console.log(password);
 
     fetch("http://localhost:8081/signup", {
         method: "POST",
@@ -20,7 +14,8 @@ console.log(password);
     .then(res => res.text())
     .then(data => {
 
-        if (data === "OK") {
+        if (data !== "NG") {
+            localStorage.setItem("username", data);
             alert("登録成功");
             location.href = "main.html";
         } else {
