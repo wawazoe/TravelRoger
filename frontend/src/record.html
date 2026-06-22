@@ -1,62 +1,51 @@
-<link rel="stylesheet" href="css/record.css">  <!-- 一番上固定（DOCTYPEより下に下ろすとCSSがうまくいかなくなる） -->
+<link rel="stylesheet" href="css/record.css">
 
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
+    <title>記録投稿</title>
 </head>
-<header>
-<!-- 後でヘッダーの共通化をする -->
-<div class="header">
-    <a href=main.html>
-        <img src="img/syugakuryokou_airplane.png" class="header-img">
-    </a>
-</div>
-</header>
 
 <body>
-<p>目的<br>
-<select name="目的">
-  <option value="0">目的を選択…</option>
-  <option value="1">旅行</option>
-  <option value="2">ライブ</option>
-  <option value="3">出張</option>
-  <option value="4">その他</option>
-</select><br>
-  <input type="text" name="purpose" size="15">
-</p>
-
-<p>場所<br>
-  <input type="text" name="place" size="15">
-</p>
-
-<p>交通手段<br>
-<select name="交通手段">
-  <option value="0">交通手段を選択…</option>
-  <option value="1">飛行機</option>
-  <option value="2">新幹線</option>
-  <option value="3">バス</option>
-  <option value="4">電車</option>
-  <option value="5">自動車</option>
-  <option value="6">自転車</option>
-  <option value="7">徒歩</option>
-</select><br>
-  <input type="text" name="way" size="15">
-</p>
-
-<form action="/backend/src" method="post"></form>
-  <a href=main.html>
-    <button type="submit">送信</button>
-  </a>
-</form>
-
+    <h1>記録投稿</h1>
+    <div>
+        タイトル<br>
+        <input type="text" id="title">
+    </div>
+    <br>
+    <div>
+        日付<br>
+        <input type="date" id="event_date">
+    </div>
+    <br>
+    <div>
+        目的<br>
+        <select id="purpose">
+            <option value="旅行">旅行</option>
+            <option value="ライブ">ライブ</option>
+            <option value="観光">出張</option>
+            <option value="その他">その他</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        場所<br>
+        <input type="text" id="location">
+    </div>
+    <br>
+    <div>
+        交通手段<br>
+        <input type="text" id="transportation">
+    </div>
+    <br>
+    <div>
+        感想<br>
+        <textarea id="impression"></textarea>
+    </div>
+    <br>
+    <button onclick="saveRecord()">投稿する</button>
+    <script src="record.js"></script>
 </body>
-
-<footer>
-<!-- 後でフッターの共通化をする -->
-<div class="footer">
-    フッター
-</div>
-</footer>
-
 </html>

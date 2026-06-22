@@ -1,42 +1,58 @@
+import java.sql.*;
+
 public class Record {
-  /*
-  public static void main(String[] args) {
-    int pur = request.getParameter("pur");  //目的
-    purpose(pur)
-    System.out.println(pur);
+    public static void main(String[] args) {
+        String url = "jdbc:postgresql://db:5432/travelloger";
+        String title = "title";
+        String event_date = "2026-01-01";
+        String purpose = "旅行";
+        String location = "東京";
+        String transportation = "飛行機";
+        String impression = "楽しい";
 
-   int pla = request.getParameter("pla");  //場所
-    purpose(pla)
-    System.out.println(pla);
+        try {
+            Class.forName("org.postgresql.Driver");
+            String user = "travelloger";
+            String pass = "travelloger";
+            Connection conn =
+            DriverManager.getConnection(url, user, pass);
+            String sql =
+                "INSERT INTO records(title, event_date, purpose, location, transportation, impression) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, title);
+            ps.setDate(
+                2,
+                java.sql.Date.valueOf(event_date)
+            );
+            ps.setString(3, purpose);
+            ps.setString(4, location);
+            ps.setString(5, transportation);
+            ps.setString(6, impression);
+            int count = ps.executeUpdate();
 
-   int way = request.getParameter("way");  //交通手段
-    purpose(way)
-    System.out.println(way);
+System.out.println(title);
 
-  }
+System.out.println(event_date);
 
-  //目的
-  public static int purpose (int pur) {
-    return (pur);
-  }
+System.out.println(purpose);
 
-  //場所
-  public static char place (char pla) {
-    return (pla);
-  }
+System.out.println(location);
 
-  //交通手段
-  public static int way (int way) {
-    return (way);
-  }
+System.out.println(transportation);
 
-  //送信
-  protected void submit (int s) {
-    if (pur < 0 && way < 0) {  //目的と交通手段に値を入れていないと送信できない
-      
-    } else {
-      System.out.println("値を入力してください");
+System.out.println(impression);
+
+
+            if (count > 0) {
+                System.out.println("投稿しました");
+            } else {
+                System.out.println("投稿失敗");
+            }
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-  }.  */
 }

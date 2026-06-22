@@ -45,6 +45,36 @@ public class LoginServer {
             }
         });
 
+        server.createContext("/record", (HttpExchange exchange) -> {
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            if ("POST".equals(exchange.getRequestMethod())) {
+                InputStream is = exchange.getRequestBody();
+                String body = new BufferedReader(
+                    new InputStreamReader(is)
+                ).lines().collect(Collectors.joining());
+                String title = getParam(body, "title");
+                String event_date = getParam(body, "event_date");
+                String purpose = getParam(body, "purpose");
+                String location = getParam(body, "location");
+                String transportation = getParam(body, "transportation");
+                String impression = getParam(body, "impression");
+                boolean result =
+                    saveRecord(
+                        title,
+                        event_date,
+                        purpose,
+                        location,
+                        transportation,
+                        impression
+                    );
+            String response = result ? "OK" : "NG";
+            exchange.sendResponseHeaders(200, response.length());
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        }
+        });
+
         server.start();
         System.out.println("Server started on 8081");
     }
@@ -85,7 +115,7 @@ public class LoginServer {
                 return rs.getString("name");
             } else {
                 return null;
-}
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -96,7 +126,6 @@ public class LoginServer {
         String url = "jdbc:postgresql://db:5432/travelloger";
         String user = "travelloger";
         String pass = "travelloger";
-
         try {
             Class.forName("org.postgresql.Driver");
             Connection conn = DriverManager.getConnection(url, user, pass);
@@ -117,4 +146,41 @@ public class LoginServer {
         }
     }
 
+    private static boolean saveRecord(
+    String title,
+    String event_date,
+    String purpose,
+    String location,
+    String transportation,
+    String impression
+) {
+    String url = "jdbc:postgresql://db:5432/travelloger";
+    String user = "travelloger";
+    String pass = "travelloger";
+    try {
+        Class.forName("org.postgresql.Driver");
+        Connection conn =
+            DriverManager.getConnection(url, user, pass);
+        String sql =
+            "INSERT INTO records(title, event_date, purpose, location, transportation, impression) " +
+            "VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps =
+            conn.prepareStatement(sql);
+        ps.setString(1, title);
+        ps.setDate(
+            2,
+            java.sql.Date.valueOf(event_date)
+        );
+        ps.setString(3, purpose);
+        ps.setString(4, location);
+        ps.setString(5, transportation);
+        ps.setString(6, impression);
+        ps.executeUpdate();
+        conn.close();
+        return true;
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
 }
