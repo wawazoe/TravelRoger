@@ -75,6 +75,24 @@ public class LoginServer {
         }
         });
 
+        server.createContext("/history", (HttpExchange exchange) -> {
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            if ("GET".equals(exchange.getRequestMethod())) {
+                String response = getHistory();
+                exchange.getResponseHeaders().add(
+                    "Content-Type",
+                    "application/json"
+                );
+        exchange.sendResponseHeaders(
+            200,
+            response.getBytes().length
+        );
+        OutputStream os = exchange.getResponseBody();
+        os.write(response.getBytes());
+        os.close();
+    }
+        });
+
         server.start();
         System.out.println("Server started on 8081");
     }
@@ -153,7 +171,8 @@ public class LoginServer {
     String location,
     String transportation,
     String impression
-) {
+)
+{
     String url = "jdbc:postgresql://db:5432/travelloger";
     String user = "travelloger";
     String pass = "travelloger";
@@ -183,4 +202,43 @@ public class LoginServer {
         return false;
     }
 }
+
+
+        private static String getHistory() {
+            String url = "jdbc:postgresql://db:5432/travelloger";
+            String user = "travelloger";
+            String pass = "travelloger";
+
+            try {
+                Class.forName("org.postgresql.Driver");
+                Connection conn =
+                    DriverManager.getConnection(url, user, pass);
+                String sql =
+                    "SELECT * FROM records ORDER BY event_date DESC";
+                PreparedStatement ps =
+                    conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                String json = "[";
+                while (rs.next()) {
+                    json += "{";
+                    json += "\"id\":" + rs.getInt("id") + ",";
+                    json += "\"title\":\"" + rs.getString("title") + "\",";
+                    json += "\"event_date\":\"" + rs.getDate("event_date") + "\",";
+                    json += "\"purpose\":\"" + rs.getString("purpose") + "\",";
+                    json += "\"location\":\"" + rs.getString("location") + "\"";
+                    json += "},";            
+                }
+
+                if (json.endsWith(",")) {
+                    json = json.substring(0, json.length() - 1);
+                }
+
+                json += "]";
+                conn.close();
+                return json;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "[]";
+            }
+        }
 }
