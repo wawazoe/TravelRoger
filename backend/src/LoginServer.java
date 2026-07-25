@@ -67,12 +67,27 @@ public class LoginServer {
                         transportation,
                         impression
                     );
-            String response = result ? "OK" : "NG";
-            exchange.sendResponseHeaders(200, response.length());
-            OutputStream os = exchange.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
-        }
+                String response = result ? "OK" : "NG";
+                exchange.sendResponseHeaders(200, response.length());
+                OutputStream os = exchange.getResponseBody();
+                os.write(response.getBytes());
+                os.close();
+            } else if ("GET".equals(exchange.getRequestMethod())) {
+                String query = exchange.getRequestURI().getQuery();
+                String id = query.split("=")[1];
+                String response = getRecord(id);
+                exchange.getResponseHeaders().add(
+                    "Content-Type",
+                    "application/json"
+                );
+                exchange.sendResponseHeaders(
+                    200,
+                    response.getBytes().length
+                );
+                OutputStream os = exchange.getResponseBody();
+                os.write(response.getBytes());
+                os.close();
+            }
         });
 
         server.createContext("/history", (HttpExchange exchange) -> {
@@ -204,7 +219,46 @@ public class LoginServer {
 }
 
 
-        private static String getHistory() {
+    private static String getRecord(String id) {
+        String url = "jdbc:postgresql://db:5432/travelloger";
+        String user = "travelloger";
+        String pass = "travelloger";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection conn =
+                DriverManager.getConnection(url, user, pass);
+            String sql =
+                "SELECT * FROM records WHERE id = ?";
+            PreparedStatement ps =
+                conn.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(id));
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String json = "{";
+                json += "\"id\":" + rs.getInt("id") + ",";
+                json += "\"title\":\"" + rs.getString("title") + "\",";
+                json += "\"event_date\":\"" + rs.getDate("event_date") + "\",";
+                json += "\"purpose\":\"" + rs.getString("purpose") + "\",";
+                json += "\"location\":\"" + rs.getString("location") + "\",";
+                json += "\"transportation\":\"" + rs.getString("transportation") + "\",";
+                json += "\"impression\":\"" + rs.getString("impression") + "\"";
+                json += "}";
+                conn.close();
+
+                return json;
+            }
+            conn.close();
+            return "{}";
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{}";
+    }
+}
+
+            private static String getHistory() {
             String url = "jdbc:postgresql://db:5432/travelloger";
             String user = "travelloger";
             String pass = "travelloger";
@@ -240,5 +294,5 @@ public class LoginServer {
                 e.printStackTrace();
                 return "[]";
             }
-        }
-}
+
+}}
