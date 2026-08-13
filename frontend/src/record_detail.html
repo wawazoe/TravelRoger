@@ -3,23 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>投稿詳細</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>投稿詳細</h1>
+<header>
 
-<p><strong>タイトル：</strong><span id="title"></span></p>
-<p><strong>日付：</strong><span id="event_date"></span></p>
-<p><strong>目的：</strong><span id="purpose"></span></p>
-<p><strong>場所：</strong><span id="location"></span></p>
-<p><strong>交通手段：</strong><span id="transportation"></span></p>
+    <h1>✈ Travel Logger</h1>
+
+</header>
+
+<div class="container">
+<div class="card">
+
+<h2>📝投稿詳細</h2>
+
+<p><strong>タイトル：</strong> <span id="title"></span></p>
+<p><strong>日付：</strong> <span id="event_date"></span></p>
+<p><strong>目的：</strong> <span id="purpose"></span></p>
+<p><strong>場所：</strong> <span id="location"></span></p>
+<p><strong>交通手段：</strong> <span id="transportation"></span></p>
 <p><strong>感想：</strong></p>
+<div class="memo" id="impression"></div>
 
 <p id="impression"></p>
 
 <br>
-<a href="history.html">一覧へ戻る</a>
+<a href="history.html" class="btn">
+    一覧へ戻る
+</a>
 <script src="record_detail.js"></script>
 
+</div>
+</div>
 </body>
 </html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>投稿編集</title>
+    <link rel="stylesheet" href="css/record.css">
+</head>
+
+<body>
+    <h1>投稿編集</h1>
+    <div>
+        タイトル<br>
+        <input type="text" id="title">
+    </div>
+    <br>
+    <div>
+        日付<br>
+        <input type="date" id="event_date">
+    </div>
+    <br>
+    <div>
+        目的<br>
+        <select id="purpose">
+            <option value="旅行">旅行</option>
+            <option value="ライブ">ライブ</option>
+            <option value="出張">出張</option>
+            <option value="その他">その他</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        場所<br>
+        <input type="text" id="location">
+    </div>
+    <br>
+    <div>
+        交通手段<br>
+        <input type="text" id="transportation">
+    </div>
+    <br>
+    <div>
+        感想<br>
+        <textarea id="impression"></textarea>
+    </div>
+    <br>
+    <button id="saveBtn">保存</button>
+    <script src="record_edit.js"></script>
+</body>
+</html>

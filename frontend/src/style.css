@@ -1,0 +1,99 @@
+/* 全体 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* ヘッダー */
+header {
+    background-color: #2563eb;
+    color: white;
+    padding: 20px;
+    text-align: left;
+}
+
+/* コンテンツ */
+.container {
+    width: 80%;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+/* カード */
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    max-width: 800px;
+}
+
+/* ボタン */
+button,
+.btn {
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover,
+.btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* 入力欄 */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 18px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+/* 感想 */
+.impression {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background: #fafafa;
+    white-space: pre-wrap;
+}
+.card h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.memo {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    min-height: 120px;
+    line-height: 1.8;
+}
+
+.card p {
+    margin: 18px 0;
+    font-size: 18px;
+}
+
+.card strong {
+    display: inline-block;
+    width: 90px;
+}
+
+/* タイトル */
+h1 {
+    margin-top: 0;
+}
